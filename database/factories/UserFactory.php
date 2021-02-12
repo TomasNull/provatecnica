@@ -18,11 +18,19 @@ use Illuminate\Support\Str;
 */
 
 $factory->define(User::class, function (Faker $faker) {
+    $name = $faker->name;
+    $last_name = $faker->lastName;
+    $mail = preg_replace("/[^a-zA-Z0-9\s]/", "", $name);
+    $mail = substr($mail, 0,1);
+    $mail = $mail . preg_replace("/[^a-zA-Z0-9\s]/", "", $last_name);
+    
     return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
+        'name' => $name,
+        'last_name' => $last_name,
+        'slug' => Str::slug($name . " " . $last_name, '-'),
+        'email' => Str::lower($mail . '@example.com')->unique()->safeEmail,
         'email_verified_at' => now(),
-        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
         'remember_token' => Str::random(10),
     ];
 });
