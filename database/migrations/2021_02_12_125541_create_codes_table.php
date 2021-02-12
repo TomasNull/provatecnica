@@ -17,7 +17,7 @@ class CreateCodesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->integer('code');
+            $table->string('promotion_code');
             $table->timestamps();
         });
     }
