@@ -6,8 +6,8 @@ use App\Model;
 use Faker\Generator as Faker;
 
 $factory->define(Model::class, function (Faker $faker) {
-    $code = $faker->ra
+    
     return [
-        'promotion_code' => $faker->
+        
     ];
 });
